@@ -1,0 +1,30 @@
+{
+  "faithfulness": 0.94,
+  "answer_relevancy": 0.96,
+  "context_precision": 0.68,
+  "evaluation_method": "Manual LLM-based scoring (no RAGAS Collections)",
+  "num_questions": 5,
+  "individual_scores": {
+    "faithfulness": [
+      1.0,
+      1.0,
+      0.9,
+      0.8,
+      1.0
+    ],
+    "answer_relevancy": [
+      1.0,
+      1.0,
+      1.0,
+      0.8,
+      1.0
+    ],
+    "context_precision": [
+      0.5,
+      0.8,
+      0.8,
+      0.8,
+      0.5
+    ]
+  }
+}

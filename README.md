@@ -8,7 +8,7 @@ Built with **LangGraph**, **Retrieval-Augmented Generation (RAG)**, and a **fait
 
 ## 🚀 Features
 
-* 📚 **Knowledge Base (RAG)** — 26 curated ML documents indexed in ChromaDB covering algorithms, deep learning, explainability, evaluation, and more
+* 📚 **Knowledge Base (RAG)** — Curated ML documents indexed in ChromaDB covering algorithms, deep learning, explainability, evaluation, and more
 * 🔀 **Intelligent Query Router** — automatically routes each question to the right pipeline: Knowledge Base retrieval, Tool use, or conversational memory
 * 🧠 **Conversation Memory** — retains recent chat history via LangGraph's `MemorySaver` for multi-turn coherent dialogue
 * ✅ **Faithfulness Evaluation Loop** — scores every answer against retrieved context (threshold: 0.7); retries generation if the answer drifts from the source

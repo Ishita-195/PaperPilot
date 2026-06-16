@@ -1,4 +1,4 @@
-# 🤖 ML Research Assistant
+# ML Research Assistant
 
 **ML Research Assistant** is an intelligent AI-powered chatbot that answers questions about machine learning concepts, algorithms, and research — grounded strictly in a curated knowledge base to eliminate hallucinations.
 
@@ -6,7 +6,7 @@ Built with **LangGraph**, **Retrieval-Augmented Generation (RAG)**, and a **fait
 
 ---
 
-## 🚀 Features
+## Features
 
 * 📚 **Knowledge Base (RAG)** — Curated ML documents indexed in ChromaDB covering algorithms, deep learning, explainability, evaluation, and more
 * 🔀 **Intelligent Query Router** — automatically routes each question to the right pipeline: Knowledge Base retrieval, Tool use, or conversational memory

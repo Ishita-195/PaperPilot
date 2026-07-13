@@ -1,0 +1,19 @@
+# ML Research Assistant — backend dependencies
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-multipart==0.0.12
+websockets==13.1
+pydantic==2.9.2
+python-dotenv==1.0.1
+
+# LLM + orchestration
+langchain-groq==0.2.1
+langgraph==0.2.45
+groq==0.13.0
+
+# Retrieval
+chromadb==0.5.20
+sentence-transformers==3.3.1
+
+# PDF ingestion
+pypdf==5.1.0

@@ -9,6 +9,7 @@ chromadb==1.5.7
 sentence-transformers==5.4.0
 pypdf
 python-dotenv
+requests
 
 # ==== FastAPI backend (Docker / local API) is installed separately: ====
 #   pip install -r backend/requirements.txt

@@ -1,3 +1,14 @@
-# Backend dependencies live in backend/requirements.txt
-# Install with:  pip install -r backend/requirements.txt
--r backend/requirements.txt
+# ==== Streamlit app (this file is what Streamlit Community Cloud installs) ====
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.11.0+cpu
+streamlit==1.56.0
+langchain==1.2.15
+langchain-groq==1.1.2
+langgraph==1.1.6
+chromadb==1.5.7
+sentence-transformers==5.4.0
+pypdf
+python-dotenv
+
+# ==== FastAPI backend (Docker / local API) is installed separately: ====
+#   pip install -r backend/requirements.txt

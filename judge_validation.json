@@ -1,0 +1,142 @@
+{
+  "num_examples": 16,
+  "label_distribution": {
+    "total": 16,
+    "faithful": 8,
+    "unfaithful": 8
+  },
+  "threshold": 0.7,
+  "judge_vs_human": {
+    "accuracy": 1.0,
+    "hallucination_precision": 1.0,
+    "hallucination_recall": 1.0,
+    "hallucination_f1": 1.0,
+    "pearson_correlation": 0.999,
+    "roc_auc": 1.0
+  },
+  "mean_score": {
+    "on_faithful": 0.978,
+    "on_unfaithful": 0.0
+  },
+  "confusion_at_threshold": {
+    "true_positive_flagged": 8,
+    "false_positive_flagged": 0,
+    "false_negative_missed": 0,
+    "true_negative_passed": 8
+  },
+  "evaluation_method": "LLM-as-judge (Groq Llama 3.3 70B) vs. human labels",
+  "per_example": [
+    {
+      "human": "faithful",
+      "judge_score": 0.9,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "XGBoost is an efficient implementation of gradient boosting that build..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 0.97,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "Random Forest builds many decision trees on random subsets of the data..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 1.0,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "SHAP assigns each feature an importance value using ideas from coopera..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 1.0,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "Common classification metrics include accuracy, precision, recall, F1-..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 0.95,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "Transformers rely on self-attention and process whole sequences in par..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 1.0,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "CNNs use convolutional layers to extract spatial features from grid-li..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 1.0,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "Overfitting is when a model learns noise rather than the underlying pa..."
+    },
+    {
+      "human": "faithful",
+      "judge_score": 1.0,
+      "judge_verdict": "faithful",
+      "agree": true,
+      "answer": "Dimensionality reduction cuts the number of features while keeping the..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "XGBoost was developed by Google in 2020 and internally uses deep neura..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "Random Forest always outperforms deep learning on every task and needs..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "SHAP predates LIME by a decade and only works on tree-based models, so..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "The Matthews correlation coefficient is the only trustworthy classific..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "Transformers process sequences one token at a time using recurrence an..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "CNNs are primarily designed for tabular time-series forecasting and ar..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "Overfitting is desirable because it improves accuracy on unseen test d..."
+    },
+    {
+      "human": "unfaithful",
+      "judge_score": 0.0,
+      "judge_verdict": "flagged",
+      "agree": true,
+      "answer": "Dimensionality reduction works by generating brand-new synthetic featu..."
+    }
+  ]
+}

@@ -27,7 +27,9 @@ RETRIEVE_K = 6          # initial vector recall
 RERANK_K = 3            # docs kept after reranking
 EMBED_MODEL = "paraphrase-MiniLM-L3-v2"
 RERANK_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
-LLM_MODEL = "llama-3.3-70b-versatile"
+# Configurable so the app survives Groq model deprecations (llama-3.3-70b was
+# retired from the Groq catalog). Override with GROQ_MODEL in the environment.
+LLM_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
 OUT_OF_SCOPE_MSG = (
     "I can only answer questions about machine learning topics in my knowledge "
@@ -70,14 +72,25 @@ def _get_reranker():
 
 
 # ================= BUILD =================
-def build_app(extra_docs: Optional[List[dict]] = None, persist_dir: Optional[str] = None):
+def build_app(
+    extra_docs: Optional[List[dict]] = None,
+    persist_dir: Optional[str] = None,
+    enable_rerank: bool = True,
+    enable_retry: bool = True,
+):
+    """Build the compiled LangGraph app.
+
+    ``enable_rerank`` / ``enable_retry`` exist so the ablation harness
+    (``python -m backend.ablation``) can measure each component's isolated
+    contribution against the same knowledge base and questions.
+    """
     import chromadb
     from langgraph.graph import StateGraph, END
     from langgraph.checkpoint.memory import MemorySaver
 
     llm = make_llm()
     embedder = _get_embedder()
-    reranker = _get_reranker()
+    reranker = _get_reranker() if enable_rerank else None
 
     all_docs = DOCUMENTS + list(extra_docs or [])
 
@@ -190,6 +203,8 @@ QUESTION:
         return state.get("route", "retrieve")
 
     def after_eval(state: AgentState):
+        if not enable_retry:
+            return "ok"
         score = state.get("faithfulness", 1.0)
         retries = state.get("eval_retries", 0)
         if score < FAITHFULNESS_THRESHOLD and retries < MAX_EVAL_RETRIES:

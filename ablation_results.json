@@ -1,0 +1,111 @@
+{
+  "reranking": {
+    "metric": "context_precision (LLM-as-judge)",
+    "rerank_off": 0.79,
+    "rerank_on": 0.826,
+    "absolute_gain": 0.036,
+    "relative_gain_pct": 4.6,
+    "per_question": [
+      {
+        "question": "What is XGBoost and why is it efficient?",
+        "context_precision_rerank_off": 0.85,
+        "context_precision_rerank_on": 0.9,
+        "delta": 0.05
+      },
+      {
+        "question": "How do SHAP and LIME differ?",
+        "context_precision_rerank_off": 0.85,
+        "context_precision_rerank_on": 0.9,
+        "delta": 0.05
+      },
+      {
+        "question": "What metrics evaluate classification models?",
+        "context_precision_rerank_off": 0.95,
+        "context_precision_rerank_on": 0.98,
+        "delta": 0.03
+      },
+      {
+        "question": "When should I use Random Forest vs SVM?",
+        "context_precision_rerank_off": 0.45,
+        "context_precision_rerank_on": 0.45,
+        "delta": 0.0
+      },
+      {
+        "question": "What is feature engineering?",
+        "context_precision_rerank_off": 0.85,
+        "context_precision_rerank_on": 0.9,
+        "delta": 0.05
+      }
+    ]
+  },
+  "faithfulness_retry": {
+    "metric": "faithfulness (LLM-as-judge)",
+    "num_questions": 8,
+    "retry_off_mean": 0.815,
+    "retry_on_mean": 0.966,
+    "flagged_on_first_pass": 1,
+    "gate_fired": 2,
+    "answers_rescued": 1,
+    "min_faithfulness_shipped_off": 0.0,
+    "min_faithfulness_shipped_on": 0.85,
+    "per_question": [
+      {
+        "question": "What is XGBoost and why is it efficient?",
+        "faithfulness_single_pass": 1.0,
+        "faithfulness_with_retry": 0.95,
+        "retries_used": 0,
+        "rescued": false
+      },
+      {
+        "question": "How do SHAP and LIME differ?",
+        "faithfulness_single_pass": 0.98,
+        "faithfulness_with_retry": 0.98,
+        "retries_used": 0,
+        "rescued": false
+      },
+      {
+        "question": "What metrics evaluate classification models?",
+        "faithfulness_single_pass": 1.0,
+        "faithfulness_with_retry": 1.0,
+        "retries_used": 0,
+        "rescued": false
+      },
+      {
+        "question": "When should I use Random Forest vs SVM?",
+        "faithfulness_single_pass": 0.0,
+        "faithfulness_with_retry": 1.0,
+        "retries_used": 2,
+        "rescued": true
+      },
+      {
+        "question": "What is feature engineering?",
+        "faithfulness_single_pass": 0.7,
+        "faithfulness_with_retry": 1.0,
+        "retries_used": 1,
+        "rescued": false
+      },
+      {
+        "question": "How does regularization relate to the bias-variance tradeoff?",
+        "faithfulness_single_pass": 1.0,
+        "faithfulness_with_retry": 0.95,
+        "retries_used": 0,
+        "rescued": false
+      },
+      {
+        "question": "Why can ensemble methods like boosting reduce overfitting?",
+        "faithfulness_single_pass": 0.85,
+        "faithfulness_with_retry": 0.85,
+        "retries_used": 0,
+        "rescued": false
+      },
+      {
+        "question": "How is cross-validation used when comparing models?",
+        "faithfulness_single_pass": 0.99,
+        "faithfulness_with_retry": 1.0,
+        "retries_used": 0,
+        "rescued": false
+      }
+    ]
+  },
+  "note": "Same KB and questions across conditions; only the named component is toggled."
+}

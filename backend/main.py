@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from backend import evaluation
-from backend.agent import build_app, make_llm, FAITHFULNESS_THRESHOLD
+from backend.agent import build_app, make_llm, FAITHFULNESS_THRESHOLD, LLM_MODEL
 from backend.kb import DOCUMENTS, categories
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -73,7 +73,7 @@ class ChatResponse(BaseModel):
 def health():
     return {
         "status": "ok",
-        "model": "llama-3.3-70b-versatile",
+        "model": LLM_MODEL,
         "kb_documents": len(DOCUMENTS) + len(STATE["extra_docs"]),
         "faithfulness_threshold": FAITHFULNESS_THRESHOLD,
     }

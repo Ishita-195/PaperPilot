@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from typing_extensions import TypedDict
 
 from backend import evaluation
+from backend.agent import LLM_MODEL  # single source of truth for the Groq model
 from backend.kb import DOCUMENTS
 
 load_dotenv()
@@ -40,7 +41,7 @@ def build_app(extra_docs=None):
     from langgraph.graph import END, StateGraph
     from sentence_transformers import SentenceTransformer
 
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
+    llm = ChatGroq(model=LLM_MODEL, temperature=0)
     embedder = SentenceTransformer("paraphrase-MiniLM-L3-v2")
 
     all_docs = DOCUMENTS + list(extra_docs or [])

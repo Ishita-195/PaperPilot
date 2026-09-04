@@ -34,9 +34,11 @@ if run:
     try:
         from langchain_groq import ChatGroq
 
+        from backend.agent import LLM_MODEL
+
         with st.spinner("Loading agent..."):
             app, embedder, collection = load_agent([])
-        judge = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
+        judge = ChatGroq(model=LLM_MODEL, temperature=0)
 
         def ask_fn(question):
             config = {"configurable": {"thread_id": "eval-dashboard"}}

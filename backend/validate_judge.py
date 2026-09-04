@@ -22,7 +22,7 @@ import json
 from pathlib import Path
 from typing import Dict, List
 
-from backend.agent import FAITHFULNESS_THRESHOLD, make_llm
+from backend.agent import FAITHFULNESS_THRESHOLD, make_llm, LLM_MODEL
 from backend.human_labels import HUMAN_LABELS, counts
 from backend import evaluation
 
@@ -124,7 +124,7 @@ def validate(llm=None) -> Dict:
             "false_negative_missed": fn,
             "true_negative_passed": n - tp - fp - fn,
         },
-        "evaluation_method": "LLM-as-judge (Groq Llama 3.3 70B) vs. human labels",
+        "evaluation_method": f"LLM-as-judge (Groq {LLM_MODEL}) vs. human labels",
         "per_example": rows,
     }
 

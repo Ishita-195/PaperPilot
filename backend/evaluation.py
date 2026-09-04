@@ -149,7 +149,7 @@ def run_evaluation(
         "answer_relevancy": round(sum(relev) / n, 3),
         "context_precision": round(sum(prec) / n, 3),
         "num_questions": n,
-        "evaluation_method": "LLM-as-judge (Groq Llama 3.3 70B)",
+        "evaluation_method": "LLM-as-judge (Groq)",
         "per_question": per_question,
     }
 

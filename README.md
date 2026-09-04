@@ -63,7 +63,7 @@ flowchart LR
     end
 
     RET <--> DB[(ChromaDB + SentenceTransformers)]
-    ANS <--> LLM[(Groq Llama 3.3 70B)]
+    ANS <--> LLM[(Groq LLM · configurable)]
     EV <--> LLM
 ```
 
@@ -74,7 +74,7 @@ flowchart LR
 | UI | Streamlit (deployed) · React 18, Vite, Tailwind CSS, Recharts |
 | Backend | FastAPI, Uvicorn, WebSockets |
 | Orchestration | LangGraph (stateful graph + checkpointer) |
-| LLM | Groq — Llama 3.3 70B |
+| LLM | Groq (`GROQ_MODEL`, default `openai/gpt-oss-120b`) |
 | Retrieval | ChromaDB · SentenceTransformers (`paraphrase-MiniLM-L3-v2`) |
 | Reranking | CrossEncoder (`ms-marco-MiniLM-L-6-v2`) |
 | Evaluation | Custom RAGAS-style LLM-as-judge |
@@ -132,6 +132,44 @@ python -m backend.evaluation     # writes ragas_baseline.json
 
 The dashboard also reports the **context-precision improvement from cross-encoder reranking** versus the vector-only baseline.
 
+## Does it actually work? Validated results
+
+Two claims in this project deserve evidence rather than assertion — that the LLM-as-judge can be *trusted*, and that reranking + the retry gate actually *help*. Both are reproducible from the repo.
+
+### 1. The faithfulness judge agrees with humans
+
+A balanced, hand-labeled set of 16 answers (8 faithful, 8 deliberately hallucinated — [`backend/human_labels.py`](backend/human_labels.py)) is scored by the judge and compared to the human labels.
+
+```bash
+python -m backend.validate_judge     # writes judge_validation.json
+```
+
+| Judge vs. human (n=16) | Result |
+|---|---|
+| Agreement (accuracy at 0.7 threshold) | **100%** |
+| Hallucination recall / precision / F1 | **1.00 / 1.00 / 1.00** |
+| ROC-AUC | **1.00** |
+| Mean score — faithful vs. hallucinated answers | **0.98 vs. 0.00** |
+
+The judge flagged every hallucination and passed every faithful answer, with near-total separation between the two groups — so the 0.7 gate is acting on a signal that matches human judgement, not noise.
+
+### 2. Reranking and the retry gate measurably help
+
+Same knowledge base, same questions, one component toggled at a time ([`backend/ablation.py`](backend/ablation.py)):
+
+```bash
+python -m backend.ablation           # writes ablation_results.json
+```
+
+| Component | Metric | Off → On |
+|---|---|---|
+| Cross-encoder reranking | mean context precision | 0.79 → **0.83** (+4.6%) |
+| Faithfulness-retry gate | mean faithfulness | 0.82 → **0.97** |
+
+The retry gate's value is clearest on a concrete case: *"When should I use Random Forest vs SVM?"* scored **0.00 faithfulness** on the first pass — a fully ungrounded answer that **would have shipped without the gate**. The retry widened retrieval and the regenerated answer scored **1.00**. Across the set, the worst answer surfaced to a user rose from **0.00 (no gate) to 0.85 (with gate)**.
+
+> Numbers are from the committed `judge_validation.json` / `ablation_results.json`; LLM-as-judge scoring has mild run-to-run variance, so re-runs land within a few hundredths.
+
 ## API
 
 | Method | Route | Purpose |
@@ -158,6 +196,9 @@ Interactive docs at `http://localhost:8000/docs`.
 │   ├── agent.py         # LangGraph agent: router, retrieve, rerank, answer, eval, retry
 │   ├── kb.py            # Curated ML knowledge base (single source of truth)
 │   ├── evaluation.py    # RAGAS-style LLM-as-judge scoring
+│   ├── human_labels.py  # Hand-labeled set for validating the judge
+│   ├── validate_judge.py# Judge-vs-human agreement (accuracy, recall, AUC)
+│   ├── ablation.py      # Reranking / retry-gate ablation study
 │   ├── requirements.txt
 │   ├── Dockerfile
 │   └── tests/           # CI tests (no API key required)

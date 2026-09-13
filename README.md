@@ -6,8 +6,6 @@
 
 [![Try the Live Demo](https://img.shields.io/badge/▶_Try_the_Live_Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://paperpilot-rag.streamlit.app)
 
-*(free tier — first load takes ~30s)*
-
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-live_demo-FF4B4B?logo=streamlit&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
